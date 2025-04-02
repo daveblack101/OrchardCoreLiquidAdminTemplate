@@ -11,6 +11,14 @@
 
     {% style name:"TheAdminLayout", src:"~/TheAdmin/css/admin-layout.min.css", debug_src:"~/TheAdmin/css/admin-layout.css", at:"Head" %}
 
+    {% if Culture.Dir == "rtl" -%}
+        {% style name:"bootstrap-rtl", version:"5", at:"Head" %}
+        {% style name:"the-admin", version:"1", depends_on:"bootstrap-rtl,TheAdminLayout", at:"Head", media:"all" %}
+    {% else -%}
+        {% style name:"bootstrap", version:"5", at:"Head" %}
+        {% style name:"the-admin", version:"1", depends_on:"bootstrap,TheAdminLayout", at:"Head", media:"all" %}
+    {% endif -%}
+
     {% script name:"font-awesome", at:"Head", version:"6" %}
     {% script name:"the-admin", at:"Foot", version:"1" %}
 
