@@ -11,7 +11,7 @@ Edit the file with caution (preferably not on the live), because some errors wil
 
 ## Todos
 - Add liquid version of ``` data-bs-theme="@await ThemeTogglerService.CurrentTheme()" data-tenant="@ThemeTogglerService.CurrentTenant" ```
-- Add liquid version of ``` @if (Orchard.IsRightToLeft())
+- ~~Add liquid version of ``` @if (Orchard.IsRightToLeft())
     {
         <style asp-name="bootstrap-rtl" version="5" at="Head"></style>
         <style media="all" asp-name="the-admin" version="1" depends-on="bootstrap-rtl,TheAdminLayout" at="Head"></style>
@@ -20,5 +20,5 @@ Edit the file with caution (preferably not on the live), because some errors wil
     {
         <style asp-name="bootstrap" version="5" at="Head"></style>
         <style media="all" asp-name="the-admin" version="1" depends-on="bootstrap,TheAdminLayout" at="Head"></style>
-    } ```
+    } ```~~
 - Test to ensure everything works as expected
