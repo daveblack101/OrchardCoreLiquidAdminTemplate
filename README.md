@@ -1,10 +1,13 @@
 # OrchardCore Liquid AdminTemplate
 A liquid admin template for OrchardCore
 
+## Possible use case
+You want to rapidly prototype admin design iterations without round-tripping to Visual Studio, or, if you are a front-end dev but want more control.
+
 ## How to use
 - Enable Admin Templates via Tools >> Admin Templates
 - Go to Design >> Admin Templates and create a new template called 'Layout'
-- Copy and paste the from Layout.liquid
+- Copy and paste the contents of Layout.liquid
 
 ## Caution
 Edit the file with caution (preferably not on the live), because some errors will break your admin, and you might have to edit the database directly, or restore App_Data from a backup.
