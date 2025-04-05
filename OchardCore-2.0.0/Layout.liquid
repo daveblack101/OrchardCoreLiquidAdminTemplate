@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="{{ Culture.Name }}" dir="{{ Culture.Dir }}" data-bs-theme="" data-tenant="">
+<head>
+    <title>{{ "PageTitle" | shape_new | shape_stringify }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- This script can't wait till the footer -->
+    {% script name:"admin-main", at:"Head", version:"1" %}
+
+    {% style name:"TheAdminLayout", src:"~/TheAdmin/css/admin-layout.min.css", debug_src:"~/TheAdmin/css/admin-layout.css", at:"Head" %}
+
+    {% if Culture.Dir == "rtl" -%}
+        {% style name:"bootstrap-rtl", version:"5", at:"Head" %}
+        {% style name:"admin", version:"1", depends_on:"bootstrap-rtl,TheAdminLayout", at:"Head", media:"all" %}
+    {% else -%}
+        {% style name:"bootstrap", version:"5", at:"Head" %}
+        {% style name:"admin", version:"1", depends_on:"bootstrap,TheAdminLayout", at:"Head", media:"all" %}
+    {% endif -%}
+
+    {% script name:"font-awesome", at:"Head", version:"6" %}
+    {% script name:"admin", at:"Foot", version:"1" %}
+
+    {% resources type: "Header" %}
+    {% render_section "HeadMeta", required: false %}
+
+    {% assign navbar = Navbar() | shape_render %}
+    {% assign adminSettings = Site.Properties.AdminSettings %}
+</head>
+<body class="preload">
+    <div class="ta-wrapper">
+        <nav class="ta-navbar-top navbar text-bg-theme fixed-top">
+            <div class="container-fluid">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <div class="brand-wrapper">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            {% shape "AdminBranding" %}
+
+                            {%- if adminSettings.DisplayTitlesInTopbar -%}
+                                <div class="brand-wrapper-title">
+                                {% render_section "Title", required: false %}
+                                </div>
+                           {%- endif -%}
+                        </div>
+                    </div>
+                   {{ navbar }}
+                </div>
+            </div>
+        </nav>
+
+        <div id="ta-left-sidebar" class="d-flex flex-column justify-content-between align-items-stretch">
+           {% render_section "Navigation", required: false %}
+            <div class="footer">
+                <button type="button" class="leftbar-compactor" title="{{"Collapse / expand menu" | t }}">
+                    <span class="d-none">{{"Collapse / expand menu" | t }}</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="ta-content">
+            {% render_section "Header", required: false %}
+            {% render_section "Messages", required: false %}
+            {% render_section "Breadcrumbs", required: false %}
+
+            {% unless adminSettings.DisplayTitlesInTopbar -%}
+              {% render_section "Title", required: false %}
+            {% endunless -%}
+
+            {% render_body %}
+        </div>
+
+        {% render_section "Footer", required: false %}
+
+    </div>
+    <div id="confirmRemoveModalMetadata" data-title="{{"Delete" | t }}" data-message="{{"Are you sure you want to remove this element?" | t }}" data-ok-text="{{"Ok" | t }}" data-cancel-text="{{"Cancel" | t }}" data-ok-class="btn-danger" data-cancel-class="btn-secondary"></div>
+    {% resources type: "Footer" %}
+</body>
+</html>
